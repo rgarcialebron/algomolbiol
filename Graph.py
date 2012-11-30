@@ -1,4 +1,4 @@
-from Bio import SeqIO
+#from Bio import SeqIO
 #
 # Class Description Comming Soon
 #
@@ -47,7 +47,7 @@ class Graph:
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #         
     def initWithEdges(self,EdgesList):
         for i in range(0,len(EdgesList)):
-            for e in EdgesList[i]:
+            for e in EdgesList[i]:                
                 if  not(e in self.a19merhash):
                     if (not(len(self.a19merhash))):
                         self.a19merhash[e] = 0
@@ -78,7 +78,7 @@ class Graph:
     def vertexDegree(self,vertex):
         return len(self.adjlist[vertex])
 
-    def indegree(self, sink):
+    def indegree(self, vertex):
         "Compute the indegree of the SINK vertex."
         return len(self.reverse[vertex])
     
@@ -294,21 +294,27 @@ if __name__ == '__main__':
     G = Graph()
     Edges = [["two","zero"],["two","one"],["three","two"],["three","one"],["fourth","three"],["fourth","two"],["five","three"],["five","fourth"],["six","seven"],["seven","eigth"],["nine","ten"]];
     Components = [['c','g'],['g','f'],['f','g'],['h','h'],['d','h'],['c','d'],['d','c'],['g','h'],['a','b'],['b','c'],['b','f'],['e','f'],['b','e'],['e','a']]
-   
-    G.initWithEdges(list(Edges))
-    print G.adjlist
-    print G.reverse
+    Edges1 = [["a","b"],["b","c"],["c","a"]];
+    G.initWithEdges(Edges1)
     for v in G.vertexhash:
-        print v
-        print G.bfsbd(G.a19merhash[v])
-    print G.cc()
+        print G.indegree(G.a19merhash[v]), G.vertexDegree(G.a19merhash[v])
+    print range(0,len(G.adjlist))
+    print range(0,len(G.reverse))
+    for v in range(0,len(G.adjlist)):
+        print G.indegree(v)
+#print G.adjlist
+    #print G.reverse
+        #
+        #print v
+    #print G.bfsbd(G.a19merhash[v])
+    #print G.cc()
     #G.createCytoscapeFile("test.sif");
-    print "Outdegrees?", G.vertexDegrees()
-    print "Indegrees", [G.indegree(vertex) for vertex in range(len(G.vertexhash))]
+    #print "Outdegrees?", G.vertexDegrees()
+    #print "Indegrees", [G.indegree(vertex) for vertex in range(len(G.vertexhash))]
         
-    print "Debug"
+    #print "Debug"
     #for vertex in G.a19merhash.values(): print vertex, G.adjlist[vertex],G.transposed()[vertex]
-    print "Strongly Connected Components", G.scc()
+#print "Strongly Connected Components", G.scc()
     ## read a small test sequence database.
     #G.initWithSeqReads("test.fasta", "fasta")
     #print len(G.vertexhash)
